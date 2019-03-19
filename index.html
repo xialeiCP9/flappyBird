@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="description" name="canvas,js,javascript,flappyBird">
+		<title>Flappy Bird</title>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="600"></canvas>
+		<script>
+			var xhr;
+			var R = {};
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			if(window.XMLHttpRequest){
+				xhr = new XMLHttpRequest();
+			} else {
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4 && xhr.status == 200){
+					var count = 0;
+					console.log(xhr.responseText);
+					var RJson = JSON.parse(xhr.responseText);
+					console.log(RJson);
+					ctx.fillText("正在加载第" + count + "张图片...",200,300);
+					for(k in RJson){
+						R[k] = new Image();
+						R[k].src = RJson[k];
+						R[k].onload = function(){
+							ctx.clearRect(0,0,canvas.width,canvas.height);
+							ctx.fillText("正在加载第" + count +"张图片...",200,300);
+							count++;
+							if(count == 8){
+								alert("加载完毕");
+							}
+						}
+					}
+				}
+			};
+			xhr.open("GET","R.json",true);
+			xhr.send();
+		</script>
+	</body>
+</html>
