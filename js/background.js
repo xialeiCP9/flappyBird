@@ -1,7 +1,7 @@
 (function(){
 	var Background = window.Background = function(){
 		this.image = game.R["bg_day"];
-		this.y = game.canvas.height * 368 / 512 - 368;
+		this.y = game.canvas.height * 0.78 - 398;
 		//移动
 		this.x = 0;
 		//移动速度

@@ -5,6 +5,7 @@
 		this.R = {};
 		this.FNO = 0;//帧编号
 		this.init();
+		this.pipes = [];
 	};
 
 	Game.prototype.init = function(){
@@ -30,6 +31,8 @@
 	Game.prototype.start = function() {
 		var self = this;
 		this.background = new Background();
+		this.land = new Land();
+		
 		setInterval(function(){
 			//清空canvas
 			self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
@@ -37,6 +40,19 @@
 			self.background.update();
 			//渲染图片
 			self.background.render();
+			self.land.update();
+			self.land.render();
+			
+
+			//渲染管子数组
+			for(var i=0;i<self.pipes.length;i++){
+				self.pipes[i].update();
+				self.pipes[i].render();
+			}
+
+			//每150帧,实例化一个管子
+			self.FNO % 150 == 0 && (new Pipe());
+
 			self.FNO++;
 			self.ctx.font = "16px Arial";
 			self.ctx.textAlign = "left";
