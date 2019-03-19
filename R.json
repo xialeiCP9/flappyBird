@@ -1,10 +1,13 @@
 {
-	"bg_day": "./images/bg_day.png",
-	"bird0_0": "./images/bird0_0.png",
-	"bird0_1": "./images/bird0_1.png",
-	"bird0_2": "./images/bird0_2.png",
-	"land": "./images/land.png",
-	"pipe_down": "./images/pipe_down.png",
-	"pipe_up.png": "./images/pipe_up.png",
-	"title": "./images/title.png"
+	"images": [
+		{"name": "bg_day" , "url": "./images/bg_day.png"},
+		{"name": "bird0_0" , "url": "./images/bird0_0.png"},
+		{"name": "bird0_1" , "url": "./images/bird0_1.png"},
+		{"name": "bird0_2" , "url": "./images/bird0_2.png"},
+		{"name": "land" , "url": "./images/land.png"},
+		{"name": "pipe_down" , "url": "./images/pipe_down.png"},
+		{"name": "pipe_up" , "url": "./images/pipe_up.png"},
+		{"name": "title" , "url": "./images/title.png"}
+	]
+	
 }

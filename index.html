@@ -3,14 +3,22 @@
 	<head>
 		<meta charset="utf-8">
 		<meta content="description" name="canvas,js,javascript,flappyBird">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
 		<title>Flappy Bird</title>
+		<style>
+			body{
+				margin: 0;
+				overflow: hidden;
+			}
+			
+		</style>
 	</head>
 	<body>
-		<canvas id="canvas" width="500" height="600"></canvas>
+		<canvas id="canvas"></canvas>
 		<script type="text/javascript" src="js/game.js"></script>
+		<script type="text/javascript" src="js/background.js"></script>
 		<script>
 			var game = new Game("canvas");
-			game.init();
 		</script>
 	</body>
 </html>
