@@ -26,14 +26,16 @@
 		this.canvas.height = height;
 		this.loadAllResources(function(){
 			self.start();
+			self.bindEvent();
 		});
 	}
 	Game.prototype.start = function() {
 		var self = this;
 		this.background = new Background();
 		this.land = new Land();
+		this.bird = new Bird();
 		
-		setInterval(function(){
+		this.timer = setInterval(function(){
 			//清空canvas
 			self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
 			//更新背景图片位置
@@ -53,10 +55,15 @@
 			//每150帧,实例化一个管子
 			self.FNO % 150 == 0 && (new Pipe());
 
+			//渲染小鸟
+			self.bird.update();
+			self.bird.render();
+
 			self.FNO++;
 			self.ctx.font = "16px Arial";
 			self.ctx.textAlign = "left";
 			self.ctx.fillText("FNO:"+self.FNO,10,20);
+
 		},20);
 	};
 	/**
@@ -99,5 +106,13 @@
 		}
 		xhr.open("GET","./R.json",true);
 		xhr.send(null);
+	}
+
+	Game.prototype.bindEvent = function(){
+		var self = this;
+		this.canvas.onclick = function(){
+			console.log("click")
+			self.bird.fly();
+		}	
 	}
 })();
