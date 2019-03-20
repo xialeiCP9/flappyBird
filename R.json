@@ -13,7 +13,17 @@
 		{"name": "land" , "url": "./images/land.png"},
 		{"name": "pipe_down" , "url": "./images/pipe_down.png"},
 		{"name": "pipe_up" , "url": "./images/pipe_up.png"},
-		{"name": "title" , "url": "./images/title.png"}
+		{"name": "title" , "url": "./images/title.png"},
+		{"name": "number_score_00" , "url": "./images/number_score_00.png"},
+		{"name": "number_score_01" , "url": "./images/number_score_01.png"},
+		{"name": "number_score_02" , "url": "./images/number_score_02.png"},
+		{"name": "number_score_03" , "url": "./images/number_score_03.png"},
+		{"name": "number_score_04" , "url": "./images/number_score_04.png"},
+		{"name": "number_score_05" , "url": "./images/number_score_05.png"},
+		{"name": "number_score_06" , "url": "./images/number_score_06.png"},
+		{"name": "number_score_07" , "url": "./images/number_score_07.png"},
+		{"name": "number_score_08" , "url": "./images/number_score_08.png"},
+		{"name": "number_score_09" , "url": "./images/number_score_09.png"}
 	]
 	
 }

@@ -9,7 +9,7 @@
 		this.h = 320;
 
 		//两个管子之间的空隙,固定为120
-		this.interspace = 160;
+		this.interspace = 260;
 		//总高度
 		this.totalHeight = game.land.y;
 
@@ -21,6 +21,9 @@
 		this.x = game.canvas.width;
 
 		this.speed = game.land.speed;
+
+		//是否已经被越过
+		this.isPass = false;
 		//每实例化一个管子,就推入数组
 		game.pipes.push(this);
 
@@ -28,12 +31,20 @@
 	}
 	Pipe.prototype.update = function(){
 		this.x -= this.speed;
-		console.log("pipe.x",this.x);
 		//碰撞检测
 		if(game.bird.R > this.x && game.bird.L < this.x + this.w){
 			if(game.bird.T < this.upHeight || game.bird.B > this.upHeight + this.interspace){
 				clearInterval(game.timer);
 			}
+		} 
+		//管子通过后,加分
+		if(game.bird.R > this.x + this.w && !this.isPass){
+			game.score++;
+			this.isPass = true;
+		}
+		//管子在不在界面上显示后,要消除该管子的实例
+		if(this.x < -this.w){
+			game.pipes.shift();
 		}
 	}
 	Pipe.prototype.render = function(){

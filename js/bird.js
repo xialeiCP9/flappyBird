@@ -38,6 +38,11 @@
 			}
 		}
 		
+		//防止跑出天空
+		if(this.y < 12){
+			this.y = 12;
+		}
+
 		this.FNO ++;
 		//鸟头转向
 		this.deg += 0.03;
@@ -47,6 +52,11 @@
 		this.R = this.x + 17; //右边
 		this.B = this.y + 12; //下边
 		this.L = this.x - 17; //左边
+		//地面碰撞检测
+		if(this.y > game.land.y - 12){
+			this.y = game.land.y - 12;
+			clearInterval(game.timer);
+		}
 
 	}
 	Bird.prototype.render = function(){

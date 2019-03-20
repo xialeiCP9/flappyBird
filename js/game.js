@@ -6,6 +6,8 @@
 		this.FNO = 0;//帧编号
 		this.init();
 		this.pipes = [];
+		//分数
+		this.score = 0;
 	};
 
 	Game.prototype.init = function(){
@@ -54,6 +56,14 @@
 
 			//每150帧,实例化一个管子
 			self.FNO % 150 == 0 && (new Pipe());
+
+			//显示分数
+			var scoreStr = self.score.toString();
+			var len = scoreStr.length;
+
+			for(var i=0;i<len;i++){
+				self.ctx.drawImage(self.R["number_score_0" + scoreStr.charAt(i)],self.canvas.width / 2 - 8 * len + 16 * i,100)
+			}
 
 			//渲染小鸟
 			self.bird.update();
