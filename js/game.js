@@ -27,53 +27,25 @@
 		this.canvas.width = width;
 		this.canvas.height = height;
 		this.loadAllResources(function(){
+
 			self.start();
-			self.bindEvent();
 		});
 	}
 	Game.prototype.start = function() {
 		var self = this;
-		this.background = new Background();
-		this.land = new Land();
-		this.bird = new Bird();
+		this.sm = new SceneManager();
 		
 		this.timer = setInterval(function(){
 			//清空canvas
 			self.ctx.clearRect(0,0,self.canvas.width,self.canvas.height);
-			//更新背景图片位置
-			self.background.update();
-			//渲染图片
-			self.background.render();
-			self.land.update();
-			self.land.render();
-			
-
-			//渲染管子数组
-			for(var i=0;i<self.pipes.length;i++){
-				self.pipes[i].update();
-				self.pipes[i].render();
-			}
-
-			//每150帧,实例化一个管子
-			self.FNO % 150 == 0 && (new Pipe());
-
-			//显示分数
-			var scoreStr = self.score.toString();
-			var len = scoreStr.length;
-
-			for(var i=0;i<len;i++){
-				self.ctx.drawImage(self.R["number_score_0" + scoreStr.charAt(i)],self.canvas.width / 2 - 8 * len + 16 * i,100)
-			}
-
-			//渲染小鸟
-			self.bird.update();
-			self.bird.render();
-
+			//场景管理器的更新和渲染
+			self.sm.update();
+			self.sm.render();
 			self.FNO++;
 			self.ctx.font = "16px Arial";
 			self.ctx.textAlign = "left";
 			self.ctx.fillText("FNO:"+self.FNO,10,20);
-
+			self.ctx.fillText("场景:" + self.sm.sceneNumber,10,40);
 		},20);
 	};
 	/**
@@ -108,7 +80,7 @@
 						self.ctx.fillText(text,self.canvas.width / 2,self.canvas.height * (1-0.618));
 						if(count == len){
 							callback && callback();
-							console.log("加载完毕");
+							console.log("加载完毕:",self.R);
 						}
 					}
 				}
@@ -116,13 +88,5 @@
 		}
 		xhr.open("GET","./R.json",true);
 		xhr.send(null);
-	}
-
-	Game.prototype.bindEvent = function(){
-		var self = this;
-		this.canvas.onclick = function(){
-			console.log("click")
-			self.bird.fly();
-		}	
 	}
 })();

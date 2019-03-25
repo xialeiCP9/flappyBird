@@ -21,10 +21,7 @@
 	}
 	Bird.prototype.update = function(){
 
-		game.FNO % 3 == 0 && this.wingStep++;
-		if(this.wingStep > 2){
-			this.wingStep = 0;
-		}
+		this.wing();
 		if(!this.hasEnergy){
 			//掉落
 			this.y += 0.4 * this.FNO;
@@ -70,7 +67,12 @@
 
 		game.ctx.restore();
 	}
-
+	Bird.prototype.wing = function() {
+		game.FNO % 3 == 0 && this.wingStep++;
+		if(this.wingStep > 2){
+			this.wingStep = 0;
+		}
+	};
 	Bird.prototype.fly = function(){
 		//发生点击事件时
 		this.hasEnergy = true;
