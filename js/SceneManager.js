@@ -30,6 +30,29 @@
 					this.shineDown = !this.shineDown;
 				}
 				this.tutorialAlpha += this.shineDown ? -0.05 : 0.05;
+				break;
+			case 3:
+				game.bird.update();
+				game.background.update();
+				game.land.update();
+
+				//管子更新
+				game.FNO % 150 == 0 && (new Pipe());
+				for(var i=0;i<game.pipes.length;i++){
+					game.pipes[i] && game.pipes[i].update();
+				}
+
+				break;
+			case 4:
+				if(game.bird.y > game.land.y - 12){
+					this.isBirdLand = true;
+					game.bird.y = game.land.y - 12;
+					this.enter(5);
+				}
+				this.birdFno ++;
+				if(!this.isBirdLand){
+					game.bird.y += 3 * this.birdFno;
+				}
 		}
 	}
 	SceneManager.prototype.render = function(){
@@ -57,6 +80,54 @@
 				game.ctx.drawImage(game.R["tutorial"],(game.canvas.width - 114) / 2,220);
 				game.ctx.restore();
 				break;
+			case 3:
+				game.background.render();
+				game.land.render();
+				game.bird.render();
+				for(var i=0;i<game.pipes.length;i++){
+					game.pipes[i] && game.pipes[i].render();
+				}
+				//显示分数
+				var scoreStr = game.score.toString();
+				var len = scoreStr.length;
+
+				for(var i=0;i<len;i++){
+					game.ctx.drawImage(game.R["number_score_0" + scoreStr.charAt(i)],game.canvas.width / 2 - 8 * len + 16 * i,100)
+				}
+				break;
+			case 4:
+				game.background.render();
+				game.land.render();
+				game.bird.render();
+				for(var i=0;i<game.pipes.length;i++){
+					game.pipes[i] && game.pipes[i].render();
+				}
+				//显示分数
+				var scoreStr = game.score.toString();
+				var len = scoreStr.length;
+
+				for(var i=0;i<len;i++){
+					game.ctx.drawImage(game.R["number_score_0" + scoreStr.charAt(i)],game.canvas.width / 2 - 8 * len + 16 * i,100)
+				}
+				break;
+			case 5:
+				game.background.render();
+				game.land.render();
+				for(var i=0;i<game.pipes.length;i++){
+					game.pipes[i] && game.pipes[i].render();
+				}
+				//显示分数
+				var scoreStr = game.score.toString();
+				var len = scoreStr.length;
+
+				for(var i=0;i<len;i++){
+					game.ctx.drawImage(game.R["number_score_0" + scoreStr.charAt(i)],game.canvas.width / 2 - 8 * len + 16 * i,100)
+				}
+				//渲染结束
+				game.ctx.drawImage(game.R["text_game_over"],(game.canvas.width - 178) / 2,this.logoY + 50);
+				break;
+				break;
+
 
 		}
 	}
@@ -71,12 +142,24 @@
 			case 2:
 				game.bird.y = 150;
 				this.tutorialAlpha = 1;
+			case 3:
+				//清空管子数组
+				game.pipes = [];
+				break;
+			case 4:
+				//小鸟是否已经触底
+				this.isBirdLand = false;
+				//小帧编号,小鸟落下
+				this.birdFno = 0;
 		}
 	}
 	//添加监听
 	SceneManager.prototype.bindEvent = function(){
 		var self = this;
 		game.canvas.onclick = function(event){
+			clickHandle(event);
+		};
+		function clickHandle(event){
 			var mouseX = event.clientX;
 			var mouseY = event.clientY;
 			switch(self.sceneNumber){
@@ -85,6 +168,12 @@
 						&& mouseY >= self.button_play_Y && mouseY <= self.button_play_Y + 70){
 						self.enter(2);
 					}
+					break;
+				case 2:
+					self.enter(3);
+					break;
+				case 3:
+					game.bird.fly();
 					break;
 			}
 		}

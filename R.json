@@ -25,7 +25,8 @@
 		{"name": "number_score_08" , "url": "./images/number_score_08.png"},
 		{"name": "number_score_09" , "url": "./images/number_score_09.png"},
 		{"name": "button_play" , "url": "./images/button_play.png"},
-		{"name": "tutorial" , "url": "./images/tutorial.png"}
+		{"name": "tutorial" , "url": "./images/tutorial.png"},
+		{"name": "text_game_over" , "url": "./images/text_game_over.png"}
 	]
 	
 }

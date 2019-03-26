@@ -52,7 +52,8 @@
 		//地面碰撞检测
 		if(this.y > game.land.y - 12){
 			this.y = game.land.y - 12;
-			clearInterval(game.timer);
+			//死亡进入场景四
+			game.sm.enter(4);
 		}
 
 	}

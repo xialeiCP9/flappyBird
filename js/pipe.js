@@ -34,7 +34,9 @@
 		//碰撞检测
 		if(game.bird.R > this.x && game.bird.L < this.x + this.w){
 			if(game.bird.T < this.upHeight || game.bird.B > this.upHeight + this.interspace){
-				clearInterval(game.timer);
+				console.log("场景四");
+				//死亡进入场景4
+				game.sm.enter(4);
 			}
 		} 
 		//管子通过后,加分
